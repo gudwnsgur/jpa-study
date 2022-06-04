@@ -1,9 +1,11 @@
-package study.jpa.basic;
+package study.jpa.basic.start;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+
+import study.jpa.basic.Member;
 
 /**
  * @author Joonhyuck Hyoung
