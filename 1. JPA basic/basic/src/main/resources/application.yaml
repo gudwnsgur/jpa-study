@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/jpabasic
+    driver-class-name: com.mysql.jdbc.Driver
+    name: jpauser
+    password: jpapassword
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true

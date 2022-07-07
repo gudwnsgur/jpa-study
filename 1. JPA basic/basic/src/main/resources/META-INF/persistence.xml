@@ -5,7 +5,7 @@
     <!--  EntityManagerFactory 생성 시 사용되는 persistence name -->
     <persistence-unit name="basic">
         <!-- Gradle 일때 클래스를 잘 못읽어서 명시해줘야 한다....;; -->
-        <class>study.jpa.basic.Member</class>
+        <class>study.jpa.basic.entityMapping.code.Member</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
@@ -21,6 +21,9 @@
             <property name="hibernate.format_sql" value="true"/>
             <!-- Comment 확인 여부 -->
             <property name="hibernate.use_sql_comments" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hbm2ddl.auto" value="create"/>
+            <property name="connection.autocommit" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>
