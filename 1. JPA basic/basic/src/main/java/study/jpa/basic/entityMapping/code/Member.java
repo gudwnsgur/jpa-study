@@ -15,6 +15,8 @@ import javax.persistence.*;
 public class Member {
     // pk 매핑
     @Id
+    // 관계형 DB를 쓰면 보통 auto_increment 를 쓴다.
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     // DB에 저장하고 싶은 이름
@@ -122,6 +124,19 @@ public class Member {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public static Member create(
+        String userName, Integer age, RoleType roleType, LocalDate createdAt, LocalDateTime modifiedAt, String description
+    ) {
+        Member member = new Member();
+        member.userName = userName;
+        member.age = age;
+        member.roleType = roleType;
+        member.createdAt = createdAt;
+        member.modifiedAt = modifiedAt;
+        member.description = description;
+        return member;
     }
 }
 
