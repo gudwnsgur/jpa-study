@@ -5,11 +5,15 @@
     <!--  EntityManagerFactory 생성 시 사용되는 persistence name -->
     <persistence-unit name="basic">
         <!-- Gradle 일때 클래스를 잘 못읽어서 명시해줘야 한다....;; -->
+        <class>study.jpa.basic.Member</class>
         <class>study.jpa.basic.entityMapping.code.Member</class>
         <class>study.jpa.basic.jpashop.domain.Item</class>
         <class>study.jpa.basic.jpashop.domain.Member</class>
         <class>study.jpa.basic.jpashop.domain.Order</class>
         <class>study.jpa.basic.jpashop.domain.OrderItem</class>
+        <class>study.jpa.basic.entityMapping.code.Member</class>
+        <class>study.jpa.basic.relationMappingBasic.code.Member</class>
+        <class>study.jpa.basic.relationMappingBasic.code.Team</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
