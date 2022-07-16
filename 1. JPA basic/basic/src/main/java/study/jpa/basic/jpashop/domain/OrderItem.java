@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,11 +19,13 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
 
-    @Column(name = "order_no")
-    private Long orderNo;
+    @ManyToOne
+    @JoinColumn(name = "no")
+    private Order order;
 
-    @Column(name = "item_no")
-    private Long itemNo;
+    @ManyToOne
+    @JoinColumn(name = "no")
+    private Item item;
 
     @Column(name = "order_price")
     private int orderPrice;
@@ -31,12 +35,20 @@ public class OrderItem {
         return no;
     }
 
-    public Long getOrderNo() {
-        return orderNo;
+    public Order getOrder() {
+        return order;
     }
 
-    public Long getItemNo() {
-        return itemNo;
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public int getOrderPrice() {

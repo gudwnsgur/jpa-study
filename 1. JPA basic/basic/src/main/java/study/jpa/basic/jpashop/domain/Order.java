@@ -1,6 +1,8 @@
 package study.jpa.basic.jpashop.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,8 +26,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
 
-    @Column(name = "member_no")
-    private Long memberNo;
+    @ManyToOne
+    @JoinColumn(name = "no")
+    private Member member;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     @Column(name = "ordered_at")
     private LocalDateTime orderedAt;
@@ -30,13 +39,18 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
     public Long getNo() {
         return no;
     }
 
-    public Long getMemberNo() {
-        return memberNo;
-    }
 
     public LocalDateTime getOrderedAt() {
         return orderedAt;
@@ -44,5 +58,11 @@ public class Order {
 
     public OrderStatus getStatus() {
         return status;
+    }
+
+    // 연관관계 편의 메서드
+    public void addOrderItem(OrderItem orderItem) {
+        orderItem.setOrder(this);
+        orderItems.add(orderItem);
     }
 }

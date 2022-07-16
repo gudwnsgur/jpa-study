@@ -1,10 +1,15 @@
 package study.jpa.basic.jpashop.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,13 +23,14 @@ public class Member {
     private Long no;
 
     private String name;
-
     private String city;
-
     private String street;
-
     @Column(name = "zip_code")
     private String zipCode;
+
+    // 실무에서 회원 A가 어떤 주문을 했는지 알 필요가 많지 않지만 예제니까 양방향 매핑 ㄱㄱ
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
 
     public Long getNo() {
         return no;
