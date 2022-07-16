@@ -59,6 +59,12 @@ public class Member {
         this.team = team;
     }
 
+    // 연관관계 편의 메소드를 만들어 사용하는걸 권장
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
+    }
+
     @Override
     public String toString() {
         return "Member{" + "no=" + no + ", userName='" + userName + '\'' + ", team=" + team.toString() + '}';

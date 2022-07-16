@@ -36,6 +36,13 @@ public class Team {
         this.teamName = teamName;
     }
 
+    // 연관관계 편의 메소드
+    // 양쪽에 있는건 오바니까 하나를 정해라
+    public void addMember(Member member) {
+        member.setTeam(this);
+        members.add(member);
+    }
+
     public Long getTeamNo() {
         return teamNo;
     }
