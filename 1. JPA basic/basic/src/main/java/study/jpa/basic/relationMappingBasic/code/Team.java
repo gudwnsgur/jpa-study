@@ -1,9 +1,15 @@
 package study.jpa.basic.relationMappingBasic.code;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -16,6 +22,11 @@ public class Team {
     private Long teamNo;
 
     private String teamName;
+
+    // Team이 One, Member가 Many
+    // mappedBy : 나는 이걸로(team) 매핑되어 있는 애야~
+    @OneToMany(mappedBy = "team")
+    private List<Member> members = new ArrayList<>();
 
     public Team() {
     }
@@ -39,6 +50,20 @@ public class Team {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+
+    public List<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<Member> members) {
+        this.members = members;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" + "teamNo=" + teamNo + ", teamName='" + teamName + '\'' + '}';
     }
 
     public static Team create(String teamName) {

@@ -18,6 +18,7 @@ public class Member {
     private Long no;
     private String userName;
 
+
     // JPA 에게 둘의 관계를 알려줘야 한다.
     // member 입장에서 Many, team 입장에서 One
     @ManyToOne
@@ -56,6 +57,11 @@ public class Member {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" + "no=" + no + ", userName='" + userName + '\'' + ", team=" + team.toString() + '}';
     }
 
     public static Member create(Team team, String userName) {
