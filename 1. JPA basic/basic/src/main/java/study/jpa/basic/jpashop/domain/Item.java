@@ -30,6 +30,9 @@ public class Item {
     @Column(name = "stock_quantity")
     private int stockQuantity;
 
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categories = new ArrayList<>();
+
     public Long getNo() {
         return no;
     }
