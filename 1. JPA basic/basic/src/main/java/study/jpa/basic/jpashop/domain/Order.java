@@ -22,13 +22,26 @@ import javax.persistence.Table;
  */
 @Entity(name = "jpashop_order")
 @Table(name = "jpashop_order")
-public class Order {
+public class Order extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
 
     @ManyToOne
-    @JoinColumn(name = "no")
+    // 새로운 사실 JoinColumn 의 name
+    // Member class의 pk를 넣어주는게 아니다. 애초에 @JoinColumn 어노테이션만으로 Member class의 pk를 읽는다.
+    // 여기서 name은 이 Order클래스의 member 컬럼의 이름을 적어주는 것임
+    /**
+     *  create table jpashop_order (
+     *        no bigint not null auto_increment,
+     *         ordered_at datetime(6),
+     *         status varchar(255),
+     *         DELIVERY_ID bigint,
+     *         MEMBER_ID bigint,
+     *         primary key (no)
+     *     ) engine=InnoDB
+     */
+    @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
     @OneToOne

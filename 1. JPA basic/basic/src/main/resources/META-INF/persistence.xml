@@ -7,10 +7,15 @@
         <!-- Gradle 일때 클래스를 잘 못읽어서 명시해줘야 한다....;; -->
 <!--        <class>study.jpa.basic.Member</class>-->
 <!--        <class>study.jpa.basic.entityMapping.code.Member</class>-->
-<!--        <class>study.jpa.basic.jpashop.domain.Item</class>-->
-<!--        <class>study.jpa.basic.jpashop.domain.Member</class>-->
-<!--        <class>study.jpa.basic.jpashop.domain.Order</class>-->
-<!--        <class>study.jpa.basic.jpashop.domain.OrderItem</class>-->
+        <class>study.jpa.basic.jpashop.domain.Item</class>
+        <class>study.jpa.basic.jpashop.domain.Member</class>
+        <class>study.jpa.basic.jpashop.domain.Order</class>
+        <class>study.jpa.basic.jpashop.domain.OrderItem</class>
+        <class>study.jpa.basic.jpashop.domain.Category</class>
+        <class>study.jpa.basic.jpashop.domain.Delivery</class>
+        <class>study.jpa.basic.jpashop.domain.Book</class>
+        <class>study.jpa.basic.jpashop.domain.Movie</class>
+        <class>study.jpa.basic.jpashop.domain.Album</class>
 <!--        <class>study.jpa.basic.entityMapping.code.Member</class>-->
 <!--        <class>study.jpa.basic.relationMappingBasic.code.Member</class>-->
 <!--        <class>study.jpa.basic.relationMappingBasic.code.Team</class>-->

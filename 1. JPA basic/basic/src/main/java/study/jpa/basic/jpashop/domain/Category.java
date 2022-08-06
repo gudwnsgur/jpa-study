@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity(name = "jpashop_category")
 @Table(name = "jpashop_category")
-public class Category {
+public class Category extends BaseEntity {
     @Id
     @GeneratedValue
     private Long no;

@@ -14,17 +14,17 @@ import javax.persistence.Table;
  */
 @Entity(name = "jpashop_order_item")
 @Table(name = "jpashop_order_item")
-public class OrderItem {
+public class OrderItem extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
 
     @ManyToOne
-    @JoinColumn(name = "no")
+    @JoinColumn(name = "ORDER_ID")
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "no")
+    @JoinColumn(name = "ITEM_ID")
     private Item item;
 
     @Column(name = "order_price")

@@ -11,7 +11,7 @@ import javax.persistence.Table;
  */
 @Entity(name = "jpashop_delivery")
 @Table(name = "jpashop_delivery")
-public class Delivery {
+public class Delivery extends BaseEntity {
     @Id @GeneratedValue
     private Long no;
 
