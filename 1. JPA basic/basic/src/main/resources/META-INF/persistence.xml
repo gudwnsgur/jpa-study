@@ -16,6 +16,10 @@
 <!--        <class>study.jpa.basic.relationMappingBasic.code.Team</class>-->
         <class>study.jpa.basic.variableMapping.code.Player</class>
         <class>study.jpa.basic.variableMapping.code.Club</class>
+        <class>study.jpa.basic.advancedMapping.code.Item</class>
+        <class>study.jpa.basic.advancedMapping.code.Book</class>
+        <class>study.jpa.basic.advancedMapping.code.Album</class>
+        <class>study.jpa.basic.advancedMapping.code.Movie</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

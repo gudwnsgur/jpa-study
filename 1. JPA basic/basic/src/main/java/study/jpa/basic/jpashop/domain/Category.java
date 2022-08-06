@@ -1,11 +1,9 @@
 package study.jpa.basic.jpashop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
 
 /**
  * @author Joonhyuck Hyoung
@@ -30,7 +28,7 @@ public class Category {
     @ManyToMany
     @JoinTable(name = "CATEGORY_ITEM",
             joinColumns = @JoinColumn(name = "CATEGORY_ID"),
-            inverseJoinColumn = @JoinColumn(name = "ITEM_ID")
+            inverseJoinColumns = @JoinColumn(name = "ITEM_ID")
     )
     private List<Item> items = new ArrayList<>();
 }
