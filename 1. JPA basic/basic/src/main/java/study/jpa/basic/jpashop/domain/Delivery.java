@@ -1,6 +1,7 @@
 package study.jpa.basic.jpashop.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -21,6 +22,6 @@ public class Delivery extends BaseEntity {
     private DeliveryStatus status;
 
     // 양방향
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
     private Order order;
 }
