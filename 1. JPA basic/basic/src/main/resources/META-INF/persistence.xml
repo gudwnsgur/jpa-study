@@ -5,8 +5,8 @@
     <!--  EntityManagerFactory 생성 시 사용되는 persistence name -->
     <persistence-unit name="basic">
         <!-- Gradle 일때 클래스를 잘 못읽어서 명시해줘야 한다....;; -->
-<!--        <class>study.jpa.basic.Member</class>-->
-<!--        <class>study.jpa.basic.entityMapping.code.Member</class>-->
+        <!--        <class>study.jpa.basic.Member</class>-->
+        <!--        <class>study.jpa.basic.entityMapping.code.Member</class>-->
         <class>study.jpa.basic.jpashop.domain.Item</class>
         <class>study.jpa.basic.jpashop.domain.Member</class>
         <class>study.jpa.basic.jpashop.domain.Order</class>
@@ -16,23 +16,26 @@
         <class>study.jpa.basic.jpashop.domain.Book</class>
         <class>study.jpa.basic.jpashop.domain.Movie</class>
         <class>study.jpa.basic.jpashop.domain.Album</class>
-<!--        <class>study.jpa.basic.entityMapping.code.Member</class>-->
-<!--        <class>study.jpa.basic.relationMappingBasic.code.Member</class>-->
-<!--        <class>study.jpa.basic.relationMappingBasic.code.Team</class>-->
-        <class>study.jpa.basic.variableMapping.code.Player</class>
-        <class>study.jpa.basic.variableMapping.code.Club</class>
-        <class>study.jpa.basic.advancedMapping.code.Item</class>
-        <class>study.jpa.basic.advancedMapping.code.Book</class>
-        <class>study.jpa.basic.advancedMapping.code.Album</class>
-        <class>study.jpa.basic.advancedMapping.code.Movie</class>
-        <class>study.jpa.basic.advancedMapping.code.Member</class>
-        <class>study.jpa.basic.advancedMapping.code.Team</class>
+        <!--        <class>study.jpa.basic.entityMapping.code.Member</class>-->
+        <!--        <class>study.jpa.basic.relationMappingBasic.code.Member</class>-->
+        <!--        <class>study.jpa.basic.relationMappingBasic.code.Team</class>-->
+        <!--        <class>study.jpa.basic.variableMapping.code.Player</class>-->
+        <!--        <class>study.jpa.basic.variableMapping.code.Club</class>-->
+        <!--        <class>study.jpa.basic.advancedMapping.code.Item</class>-->
+        <!--        <class>study.jpa.basic.advancedMapping.code.Book</class>-->
+        <!--        <class>study.jpa.basic.advancedMapping.code.Album</class>-->
+        <!--        <class>study.jpa.basic.advancedMapping.code.Movie</class>-->
+        <!--        <class>study.jpa.basic.advancedMapping.code.Member</class>-->
+        <!--        <class>study.jpa.basic.advancedMapping.code.Team</class>-->
+        <class>study.jpa.basic.proxy.code.Member</class>
+        <class>study.jpa.basic.proxy.code.Team</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.user" value="jpauser"/>
             <property name="javax.persistence.jdbc.password" value="jpapassword"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpabasic?characterEncoding=UTF-8&amp;serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/jpabasic?characterEncoding=UTF-8&amp;serverTimezone=UTC"/>
 
             <!-- 하이버네이트 사용 시 다른 DB에서 MySQL 문법을 사용 가능하도록 변경.-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
