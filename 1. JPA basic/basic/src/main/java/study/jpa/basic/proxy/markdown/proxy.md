@@ -20,7 +20,6 @@ public void printUserAndTeam(String memberId) {
 ```java
 public void printUser(String memberId) {
     Member member = em.find(Member.class, memberId);
-    Team team = member.getTeam();
     System.out.println("회원 이름: " + member.getUsername());
 }
 ```

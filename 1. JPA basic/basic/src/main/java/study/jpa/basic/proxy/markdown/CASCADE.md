@@ -40,15 +40,14 @@
   - 부모 엔티티와 연관관계가 끊어진 자식 엔티티 를 자동으로 삭제
 - `orphanRemoval = true`
 
+`OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)`
+
 ```java
 Parent parent1 = em.find(Parent.class, id);
 parent1.getChildren().remove(0);
 ```
 
 - 자식 엔티티를 컬렉션에서 제거
-- DELETE FROM CHILD WHERE ID=?
-- 참조가 제거된 엔티티는 다른 곳에서 참조하지 않는 고아 객체로
-- 보고 삭제하는 기능
 - `참조하는 곳이 하나일 때 사용해야함!` : cascade와 동일
   - 특정 엔티티가 개인 소유할 때 사용
   - `@OneToOne`, `@OneToMany`만 가능
@@ -65,6 +64,4 @@ parent1.getChildren().remove(0);
 - 기존 : 스스로 생명주기를 관리하는 엔티티는 `em.persist()`로 영속화, `em.remove()`로 제거
 - 둘 다 활성화 하면 : 두 옵션을 모두 활성화 하면 부모 엔티티를 통해서 자식의 생명 주기를 관리할 수 있음 
 - 도메인 주도 설계(DDD)의 `Aggregate Root`개념을 구현할 때 유용
-  - repository는 `Aggregate Root`만 컨텍하고 나머지는 repo를 만들지 않는다?
-  - `Aggregate Root`를 통해 생명주기를 관리
-  - `Aggregate Root` : parent
+

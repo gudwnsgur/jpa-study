@@ -37,7 +37,7 @@ public class ProxyMain {
 
             System.out.println("==============DDDDDDD=================");
 
-            Member proxyMember = em.getReference(Member.class, member.getId());
+            Member proxyMember = em.getReference(Member.class, 1L);
 
             System.out.println("==============EEEEEEE===================");
 
