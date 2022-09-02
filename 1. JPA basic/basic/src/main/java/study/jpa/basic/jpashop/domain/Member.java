@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,9 @@ public class Member extends BaseEntity {
     @Column(name = "zip_code")
     private String zipCode;
 
+    @Embedded // Address 에서 @Embeddable 추가시 생략가능
+    private Address address;
+
     // 실무에서 회원 A가 어떤 주문을 했는지 알 필요가 많지 않지만 예제니까 양방향 매핑 ㄱㄱ
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
@@ -51,4 +55,14 @@ public class Member extends BaseEntity {
     public String getZipCode() {
         return zipCode;
     }
+
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
 }

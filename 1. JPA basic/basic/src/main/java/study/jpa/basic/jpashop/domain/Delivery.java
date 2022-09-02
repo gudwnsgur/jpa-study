@@ -1,5 +1,6 @@
 package study.jpa.basic.jpashop.domain;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,9 @@ public class Delivery extends BaseEntity {
     @Id @GeneratedValue
     private Long no;
 
+    @Embedded
+    private Address address;
+
     private String city;
     private String street;
     private String zipCode;
@@ -24,4 +28,12 @@ public class Delivery extends BaseEntity {
     // 양방향
     @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
     private Order order;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }
