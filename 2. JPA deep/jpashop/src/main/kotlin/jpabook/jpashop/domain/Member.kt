@@ -12,11 +12,13 @@ data class Member(
     @Column(name = "member_id")
     val id: Long,
 
+    // val : Getter
+    // var : Getter + Setter
     val name: String,
 
     @Embedded
     val address: Address,
 
     @OneToMany(mappedBy = "member")
-    val orders: MutableList<Order> = mutableListOf()
+    val orders: MutableList<Order> = arrayListOf()
 )

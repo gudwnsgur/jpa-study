@@ -8,11 +8,12 @@ data class Delivery(
     @Column(name = "delivery_id")
     val id: Long,
 
-    @OneToOne(mappedBy = "delivery")
-    val order: Order,
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
+    var order: Order,
 
     @Embedded
     val address: Address,
 
-    val status: OrderStatus,
+    @Enumerated(EnumType.STRING)
+    val status: DeliveryStatus,
 )

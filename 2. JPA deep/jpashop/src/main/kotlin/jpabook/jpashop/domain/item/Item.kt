@@ -19,5 +19,5 @@ open class Item constructor(
     val id: Long? = null
 
     @ManyToMany(mappedBy = "items")
-    open val categories: List<Category> = emptyList()
+    val categories: MutableList<Category> = arrayListOf()
 }
