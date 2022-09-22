@@ -10,14 +10,14 @@ import javax.persistence.*
 data class Member(
     @Id @GeneratedValue
     @Column(name = "member_id")
-    val id: Long,
+    val id: Long = 0L,
 
     // val : Getter
     // var : Getter + Setter
     val name: String,
 
     @Embedded
-    val address: Address,
+    val address: Address? = null,
 
     @OneToMany(mappedBy = "member")
     val orders: MutableList<Order> = arrayListOf()
