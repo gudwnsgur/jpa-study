@@ -5,11 +5,13 @@ import jpabook.jpashop.repository.*
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import org.springframework.boot.test.context.*
+import org.springframework.transaction.annotation.Transactional
 
 /**
  * @author Joonhyuck Hyoung
  */
 @SpringBootTest // 스프링 부트 띄우고 테스트(이게 없으면 @Autowired 다 실패)
+@Transactional
 internal class MemberServiceTest(
     private val memberService: MemberService,
     private val memberRepository: MemberRepository,

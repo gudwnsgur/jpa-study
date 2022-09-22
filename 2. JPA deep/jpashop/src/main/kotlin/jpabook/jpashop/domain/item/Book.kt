@@ -10,8 +10,8 @@ import javax.persistence.Entity
 @Entity
 @DiscriminatorValue("BOOK")
 class Book(
-    val author: String,
-    val isbn: String,
+    val author: String? = "",
+    val isbn: String? = "",
 
     name: String,
     price: Int,
