@@ -14,7 +14,7 @@ data class Member(
 
     // val : Getter
     // var : Getter + Setter
-    val name: String,
+    var name: String,
 
     @Embedded
     val address: Address? = null,

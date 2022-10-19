@@ -42,4 +42,15 @@ class MemberService(
         if(memberRepository.findByName(member.name).isNotEmpty())
             throw IllegalStateException("이미 존재하는 회원입니다.")
     }
+
+    @Transactional
+    fun update(id: Long, name: String) {
+        memberRepository.findOne(id)?.apply {
+            this.name = name
+        }
+
+        /** in java **/
+        // Member member = memberRepository.findOne(id);
+        // member.setName(name);
+    }
 }
