@@ -15,7 +15,7 @@ data class Delivery(
     val address: Address? = null,
 
     @Enumerated(EnumType.STRING)
-    val status: DeliveryStatus,
+    val status: DeliveryStatus = DeliveryStatus.READY,
 ) {
     companion object {
         fun create(address: Address?, status: DeliveryStatus): Delivery {

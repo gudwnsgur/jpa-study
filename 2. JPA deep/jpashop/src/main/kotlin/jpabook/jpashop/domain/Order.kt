@@ -21,10 +21,10 @@ data class Order(
     @JoinColumn(name = "delivery_id")
     private var delivery: Delivery,
 
-    val orderDate: LocalDateTime, // 주문 시간
+    val orderDate: LocalDateTime = LocalDateTime.now(), // 주문 시간
 
     @Enumerated(EnumType.STRING)
-    var status: OrderStatus, // 주문 상세 (ORDER, CANCEL)
+    var status: OrderStatus = OrderStatus.ORDER, // 주문 상세 (ORDER, CANCEL)
 ) {
 
     // == 연관관계 메서드 == //
