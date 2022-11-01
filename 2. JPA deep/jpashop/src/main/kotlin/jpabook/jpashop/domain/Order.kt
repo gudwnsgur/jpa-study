@@ -12,14 +12,14 @@ data class Order(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private var member: Member,
+    var member: Member,
 
     @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL])
     val orderItems: MutableList<OrderItem> = arrayListOf(),
 
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JoinColumn(name = "delivery_id")
-    private var delivery: Delivery,
+    var delivery: Delivery,
 
     val orderDate: LocalDateTime = LocalDateTime.now(), // 주문 시간
 
@@ -28,7 +28,7 @@ data class Order(
 ) {
 
     // == 연관관계 메서드 == //
-    fun setMember(member: Member) {
+    fun settingMember(member: Member) {
         this.member = member;
         member.orders.add(this)
     }
@@ -38,7 +38,7 @@ data class Order(
         orderItem.order = this
     }
 
-    fun setDelivery(delivery: Delivery) {
+    fun settingDelivery(delivery: Delivery) {
         this.delivery = delivery
         delivery.order = this
     }

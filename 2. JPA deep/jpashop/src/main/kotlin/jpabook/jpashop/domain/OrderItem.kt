@@ -1,6 +1,7 @@
 package jpabook.jpashop.domain
 
 import jpabook.jpashop.domain.item.*
+import net.minidev.json.annotate.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -15,6 +16,7 @@ data class OrderItem(
     val item: Item,
 
     /** 주문 */
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     var order: Order? = null,

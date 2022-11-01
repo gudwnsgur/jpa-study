@@ -1,5 +1,6 @@
 package jpabook.jpashop.domain
 
+import net.minidev.json.annotate.JsonIgnore
 import javax.persistence.*
 
 /**
@@ -19,6 +20,7 @@ data class Member(
     @Embedded
     val address: Address? = null,
 
+    @JsonIgnore
     @OneToMany(mappedBy = "member")
     val orders: MutableList<Order> = arrayListOf()
 )
