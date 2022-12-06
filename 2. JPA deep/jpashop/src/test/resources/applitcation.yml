@@ -1,2 +1,10 @@
 logging.level:
   org.hibernate.SQL: DEBUG
+
+
+# 모든 프로젝트에 한번에 설정할 수 있음
+spring:
+  jpa:
+    properties:
+      hibernate:
+        default_default_fetch_size: 1000
