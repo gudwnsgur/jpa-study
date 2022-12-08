@@ -17,15 +17,17 @@ class OrderQueryRepository(
      */
     fun findOrderQueryDtos(): List<OrderQueryDto> {
         // root 조회(toOne 코드를 모두 한번에 조회)
-        val result = findOrders()
+        val result = findOrders() // Query 1
 
-        // 루프를 돌면서 컬렉션 추가(추가 쿼리 실행)
+        // 루프를 돌면서 컬렉션 추가(추가 쿼리 실행) // Query N
         return result.onEach { order ->
             order.orderItems = findOrderItems(order.orderId)
         }
     }
 
     // 1:N 관계(컬렉션)를 제외한 나머지를 한번에 조회
+    // 이거 하면서 영한쌤이 한말
+    // 하.... 이래서 그... 쿼리디에셀 쓰시면은 이런거 안해도 되거등용.... 다 바로 할수있거든용...
     private fun findOrders(): List<OrderQueryDto> {
         return em.createQuery(
             "select new jpabook.jpashop.repository.OrderQueryDto(o.id, m.name, o.orderDate, o.status, d.address)" +
@@ -52,9 +54,9 @@ class OrderQueryRepository(
      */
     fun findAllByDto_optimization(): List<OrderQueryDto> {
         //루트 조회(toOne 코드를 모두 한번에 조회)
-        val result = findOrders()
+        val result = findOrders() // 여긴 똑같음 Query 1
 
-        // orderItem 컬렉션을 map으로
+        // orderItem 컬렉션을 map으로 // in query를 내가 직접 명시하겠다! Query 1
         val orderItemMap: Map<Long, List<OrderItemQueryDto>> = findOrderItemMap(toOrderIds(result))
 
         // 루프를 돌면서 컬렉션 추가(쿼리 실행 안됨)
