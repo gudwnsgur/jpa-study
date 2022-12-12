@@ -38,6 +38,13 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
+tasks {
+	test {
+		useJUnitPlatform {
+			excludeEngines = setOf("junit-vintage")
+		}
+	}
+}
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
