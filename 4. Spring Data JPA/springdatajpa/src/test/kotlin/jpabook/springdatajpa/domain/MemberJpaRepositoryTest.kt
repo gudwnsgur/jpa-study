@@ -25,7 +25,7 @@ class MemberJpaRepositoryTest @Autowired constructor(
 
     @Test
     fun testMember() {
-        val member = Member.create("memberA")
+        val member = Member.create("memberA", 20)
         val saveMember = memberJpaRepository.save(member)
 
         val findMember = memberJpaRepository.find(saveMember.id)

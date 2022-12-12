@@ -17,7 +17,7 @@ class MemberRepositoryTest @Autowired constructor(
 
     @Test
     fun testMember() {
-        val member = Member.create("memberA")
+        val member = Member.create("memberA", 20)
         val saveMember = memberRepository.save(member)
 
         val findMember = memberRepository.findById(saveMember.id).get()
