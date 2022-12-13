@@ -35,4 +35,15 @@ class MemberJpaRepositoryTest @Autowired constructor(
 
         assertEquals(findMember, member)
     }
+
+    @Test
+    fun findByUserNameAndAgeGreaterThan() {
+        memberJpaRepository.save(Member.create("AAA", 10))
+        memberJpaRepository.save(Member.create("AAA", 20))
+
+        val result = memberJpaRepository.findByUserNameAndAgeGreaterThan("AAA", 15)
+        assertEquals("AAA", result[0].username)
+        assertEquals(20, result[0].age)
+        assertEquals(1, result.size)
+    }
 }

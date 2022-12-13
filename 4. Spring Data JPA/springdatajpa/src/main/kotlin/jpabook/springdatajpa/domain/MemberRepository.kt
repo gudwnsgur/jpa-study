@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.*
 /**
  * @author Joonhyuck Hyoung
  */
-interface MemberRepository : JpaRepository<Member, Long>
+interface MemberRepository : JpaRepository<Member, Long> {
+    fun findByUsernameAndAgeGreaterThan(username: String, age: Int): List<Member>
+}

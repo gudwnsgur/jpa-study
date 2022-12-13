@@ -55,4 +55,15 @@ class MemberRepositoryTest @Autowired constructor(
         val deleteCount = memberRepository.count()
         assertEquals(0, deleteCount)
     }
+
+    @Test
+    fun findByUserNameAndAgeGreaterThan() {
+        memberRepository.save(Member.create("AAA", 10))
+        memberRepository.save(Member.create("AAA", 20))
+
+        val result = memberRepository.findByUsernameAndAgeGreaterThan("AAA", 15)
+        assertEquals("AAA", result[0].username)
+        assertEquals(20, result[0].age)
+        assertEquals(1, result.size)
+    }
 }
