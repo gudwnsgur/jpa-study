@@ -27,4 +27,32 @@ class MemberRepositoryTest @Autowired constructor(
 
         assertEquals(findMember, member)
     }
+
+    @Test
+    fun basicCRUD() {
+        val member1 = Member.create("member1", 20)
+        val member2 = Member.create("member2", 25)
+        memberRepository.save(member1)
+        memberRepository.save(member2)
+
+        // 단건 조회 검증
+        val findMember1 = memberRepository.findById(member1.id).get()
+        val findMember2 = memberRepository.findById(member2.id).get()
+        assertEquals(member1, findMember1)
+        assertEquals(member2, findMember2)
+
+        // 리스트 조회 검증
+        val all = memberRepository.findAll()
+        assertEquals(2, all.size)
+
+        // 카운트 검증
+        val count = memberRepository.count()
+        assertEquals(2, count)
+
+        // 삭제 검증
+        memberRepository.delete(member1)
+        memberRepository.delete(member2)
+        val deleteCount = memberRepository.count()
+        assertEquals(0, deleteCount)
+    }
 }
