@@ -24,4 +24,7 @@ interface MemberRepository : JpaRepository<Member, Long> {
     @Query("select new jpabook.springdatajpa.dto.MemberDto(m.id, m.username, t.name) " +
         "from Member m join m.team t")
     fun fundMemberDto(): List<MemberDto>
+
+    @Query("select m from Member m where m.username in :names")
+    fun findByNames(@Param("names") names: List<String>)
 }
