@@ -1,5 +1,6 @@
 package jpabook.springdatajpa.domain
 
+import jpabook.springdatajpa.dto.*
 import org.springframework.data.jpa.repository.*
 import org.springframework.data.repository.query.*
 
@@ -14,4 +15,13 @@ interface MemberRepository : JpaRepository<Member, Long> {
 
     @Query("select m from Member m where m.username= :username and m.age = :age")
     fun findUser(@Param("username") username: String, @Param("age") age: Int): List<Member>
+
+    // 단순 값 하나 조회
+    @Query("select m.username from Member m")
+    fun findUserNameList(): List<String>
+
+    // DTO로 직접 조회 (DTO가 있어야 함) 하지만 이후에 queryDSL 쓰면 이거보다 더 편함 ㅎㅎ
+    @Query("select new jpabook.springdatajpa.dto.MemberDto(m.id, m.username, t.name) " +
+        "from Member m join m.team t")
+    fun fundMemberDto(): List<MemberDto>
 }
