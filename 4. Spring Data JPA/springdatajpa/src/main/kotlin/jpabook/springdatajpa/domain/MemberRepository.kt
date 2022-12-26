@@ -1,6 +1,7 @@
 package jpabook.springdatajpa.domain
 
 import jpabook.springdatajpa.dto.*
+import org.springframework.data.domain.*
 import org.springframework.data.jpa.repository.*
 import org.springframework.data.repository.query.*
 
@@ -27,4 +28,7 @@ interface MemberRepository : JpaRepository<Member, Long> {
 
     @Query("select m from Member m where m.username in :names")
     fun findByNames(@Param("names") names: List<String>)
+
+    // pageAble 인터페이스 구현체를 넘기면 되는데 보통 PageRequest를 쓴다
+    fun findByAge(age: Int, pageable: Pageable): Page<Member>
 }

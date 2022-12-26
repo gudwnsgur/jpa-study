@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.boot.test.context.*
+import org.springframework.data.domain.*
 import org.springframework.transaction.annotation.*
 
 /**
@@ -65,5 +66,32 @@ class MemberRepositoryTest @Autowired constructor(
         assertEquals("AAA", result[0].username)
         assertEquals(20, result[0].age)
         assertEquals(1, result.size)
+    }
+
+    @Test
+    fun page() {
+        // given
+        memberRepository.save(Member(username = "memberA", age = 10))
+        memberRepository.save(Member(username = "memberB", age = 20))
+        memberRepository.save(Member(username = "memberC", age = 30))
+        memberRepository.save(Member(username = "memberD", age = 40))
+        memberRepository.save(Member(username = "memberE", age = 50))
+
+        // when
+        val pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "username"))
+        val page: Page<Member> = memberRepository.findByAge(age = 10, pageable = pageRequest)
+
+        val content = page.content
+        println("""
+            ======== paging ========
+            size : ${content.size}
+            total elements : ${page.totalElements}
+            page number : ${page.number}
+            total pages : ${page.totalPages}
+            첫 번째 항목인가? : ${page.isFirst}
+            다음 페이지가 있는가? :${page.hasNext()}
+            ======== paging ========
+        """.trimIndent())
+
     }
 }
