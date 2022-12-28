@@ -46,4 +46,20 @@ class MemberJpaRepositoryTest @Autowired constructor(
         assertEquals(20, result[0].age)
         assertEquals(1, result.size)
     }
+
+    @Test
+    fun bulkUpdate() {
+        // given
+        memberJpaRepository.save(Member(username = "member1", age = 10))
+        memberJpaRepository.save(Member(username = "member2", age = 19))
+        memberJpaRepository.save(Member(username = "member3", age = 20))
+        memberJpaRepository.save(Member(username = "member4", age = 21))
+        memberJpaRepository.save(Member(username = "member5", age = 40))
+
+        // when
+        val resultCount = memberJpaRepository.bulkAgePlus(20)
+
+        // then
+        assertEquals(3, resultCount)
+    }
 }

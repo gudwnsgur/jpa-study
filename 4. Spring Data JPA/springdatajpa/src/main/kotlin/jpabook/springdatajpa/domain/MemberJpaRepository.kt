@@ -19,7 +19,7 @@ class MemberJpaRepository(
         return em.find(Member::class.java, id)
     }
 
-    fun findAll() : List<Member> {
+    fun findAll(): List<Member> {
         return em.createQuery("select m from Member m", Member::class.java).resultList
     }
 
@@ -33,7 +33,8 @@ class MemberJpaRepository(
 
     // 이름과 나이 기준으로 회원 조회
     fun findByUserNameAndAgeGreaterThan(username: String, age: Int): List<Member> {
-        return em.createQuery("select m from Member m where m.username = :username and m.age > :age", Member::class.java)
+        return em.createQuery("select m from Member m where m.username = :username and m.age > :age",
+            Member::class.java)
             .setParameter("username", username)
             .setParameter("age", age)
             .resultList
@@ -45,5 +46,11 @@ class MemberJpaRepository(
             .setFirstResult(offset)
             .setMaxResults(limit)
             .resultList
+    }
+
+    fun bulkAgePlus(age: Int): Int {
+        return em.createQuery("update Member m set m.age = m.age + 1 where m.age >= :age", Member::class.java)
+            .setParameter("age", age)
+            .executeUpdate()
     }
 }

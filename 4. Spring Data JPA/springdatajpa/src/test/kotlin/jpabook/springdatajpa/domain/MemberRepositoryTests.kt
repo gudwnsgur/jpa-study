@@ -94,4 +94,20 @@ class MemberRepositoryTest @Autowired constructor(
         """.trimIndent())
 
     }
+    
+    @Test
+    fun bulkUpdate() {
+        // given
+        memberRepository.save(Member(username = "member1", age = 10))
+        memberRepository.save(Member(username = "member2", age = 19))
+        memberRepository.save(Member(username = "member3", age = 20))
+        memberRepository.save(Member(username = "member4", age = 21))
+        memberRepository.save(Member(username = "member5", age = 40))
+
+        // when
+        val resultCount = memberRepository.bulkAgePlus(20)
+
+        // then
+        assertEquals(3, resultCount)
+    }
 }

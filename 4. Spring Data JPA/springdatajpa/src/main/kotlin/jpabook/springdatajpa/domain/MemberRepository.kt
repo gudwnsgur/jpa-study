@@ -31,4 +31,8 @@ interface MemberRepository : JpaRepository<Member, Long> {
 
     // pageAble 인터페이스 구현체를 넘기면 되는데 보통 PageRequest를 쓴다
     fun findByAge(age: Int, pageable: Pageable): Page<Member>
+
+    @Modifying
+    @Query("update Member m set m.age = m.age + 1 where m.age >= :age")
+    fun bulkAgePlus(@Param("age") age: Int): Int
 }
