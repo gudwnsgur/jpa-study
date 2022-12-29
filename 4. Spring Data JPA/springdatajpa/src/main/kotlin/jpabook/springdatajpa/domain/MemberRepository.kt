@@ -11,8 +11,8 @@ import org.springframework.data.repository.query.*
 interface MemberRepository : JpaRepository<Member, Long> {
     fun findByUsernameAndAgeGreaterThan(username: String, age: Int): List<Member>
 
-    @Query(name = "Member.findByUsername") // 생략 가능
-    fun findByUsername(@Param("username") username: String): List<Member>
+//    @Query(name = "Member.findByUsername") // 생략 가능
+//    fun findByUsername(@Param("username") username: String): List<Member>
 
     @Query("select m from Member m where m.username= :username and m.age = :age")
     fun findUser(@Param("username") username: String, @Param("age") age: Int): List<Member>
@@ -35,4 +35,26 @@ interface MemberRepository : JpaRepository<Member, Long> {
     @Modifying
     @Query("update Member m set m.age = m.age + 1 where m.age >= :age")
     fun bulkAgePlus(@Param("age") age: Int): Int
+
+    // 연관된 엔티티를 한번에 가져오려면??? FETCH!!!
+    @Query("select m from Member m left join fetch m.team")
+    fun findMemberFetchJoin(): List<Member>
+
+    // JPQL 없이도 페치조인을 사용할 수 있다!
+
+    // 1. 공통메서드를 오버라이드하는 방식
+    @EntityGraph(attributePaths = {"team"})
+    override fun findAll(): List<Member>
+
+    // 2. JPQL + 엔티티그래프
+    @EntityGraph(attributePaths = {"team"})
+    @Query("select m from Member m")
+    fun findMemberEntityGraph(): List<Member>
+
+    // 3. 메서드명으로
+    @EntityGraph(attributePaths = {"team"})
+    fun findByUsername(username: String): List<Member>
+
+    // fetch 조인의 간편 버전이라 생각하면 된다.
+    // left outer join 사용
 }
