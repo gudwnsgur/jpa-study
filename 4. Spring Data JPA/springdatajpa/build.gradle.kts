@@ -1,11 +1,24 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript {
+	dependencies {
+		classpath("org.jetbrains.kotlin:kotlin-allopen:1.6.21")
+	}
+}
+
 plugins {
 	id("org.springframework.boot") version "2.6.11"
 	id("io.spring.dependency-management") version "1.0.13.RELEASE"
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
 	kotlin("plugin.jpa") version "1.6.21"
+
+	kotlin("plugin.allopen") version "1.6.21"
+}
+allOpen {
+	annotation("javax.persistence.Entity")
+	annotation("javax.persistence.MappedSuperclass")
+	annotation("javax.persistence.Embeddable")
 }
 
 group = "jpabook"
@@ -17,6 +30,7 @@ configurations {
 		extendsFrom(configurations.annotationProcessor.get())
 	}
 }
+apply(plugin = "org.jetbrains.kotlin.plugin.allopen")
 
 repositories {
 	mavenCentral()

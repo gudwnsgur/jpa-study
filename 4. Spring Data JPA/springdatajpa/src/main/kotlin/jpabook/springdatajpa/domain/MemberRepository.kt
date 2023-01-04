@@ -43,18 +43,20 @@ interface MemberRepository : JpaRepository<Member, Long> {
     // JPQL 없이도 페치조인을 사용할 수 있다!
 
     // 1. 공통메서드를 오버라이드하는 방식
-    @EntityGraph(attributePaths = {"team"})
+    @EntityGraph(attributePaths = ["team"])
     override fun findAll(): List<Member>
 
     // 2. JPQL + 엔티티그래프
-    @EntityGraph(attributePaths = {"team"})
+    @EntityGraph(attributePaths = ["team"])
     @Query("select m from Member m")
     fun findMemberEntityGraph(): List<Member>
 
     // 3. 메서드명으로
-    @EntityGraph(attributePaths = {"team"})
+    @EntityGraph(attributePaths = ["team"])
     fun findByUsername(username: String): List<Member>
 
+    // 회원 데이터 쓸 때 회원데이터만 쓰면 엔티티그래프 쓸일이 없음
+    // 근데 같이 가져오고싶을때도 있음
     // fetch 조인의 간편 버전이라 생각하면 된다.
     // left outer join 사용
 }

@@ -7,7 +7,7 @@ import javax.persistence.*
  * @author Joonhyuck Hyoung
  */
 @Entity
-data class Team(
+class Team(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
     val name: String,
