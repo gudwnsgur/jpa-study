@@ -20,7 +20,7 @@ import javax.persistence.EntityManager
 @Transactional
 class QuerydslBasicTest @Autowired constructor(
     private val em: EntityManager,
-){
+) {
     private lateinit var queryFactory: JPAQueryFactory
 
     @BeforeEach
@@ -83,7 +83,9 @@ class QuerydslBasicTest @Autowired constructor(
         val qMember1 = QMember("m") // 별칭을 직접 지정
         val qMember2 = member // 기본 인스턴스 사용
 
-        // static import로 추가할수도 있다.
+        /**
+         * static import로 추가할수도 있다.
+         */
         val member = queryFactory.select(member)
             .from(member)
             .where(member.username.eq("member1"))
@@ -94,6 +96,62 @@ class QuerydslBasicTest @Autowired constructor(
         /**
          * 같은 테이블을 조인해야 하는 경우 테이블명이 달라져야하기 때문에 별칭을 지정해야 하지만
          * 그게 아니라면 기본 인스턴스를 쓰거나 import 해서 쓰는걸 권장한다.
+         */
+    }
+
+    @Test
+    fun `검색 조건 쿼리 - 기본 검색 쿼리`() {
+        /**
+         *  검색 조건은 .and(), .or() 메서드 체인을 연결 가능
+         *  select(member).from(member) == selectFrom(member)
+         */
+        val member1 = queryFactory
+            .selectFrom(member)
+            .where(member.username.eq("member1")
+                .and(member.age.eq(10)))
+            .fetchOne()
+
+        Assertions.assertEquals("member1", member1?.username)
+
+        /**
+         * JPQL이 제공하는 모든 검색 조건을 다 제공한다.
+         */
+        val member2 = queryFactory
+            .selectFrom(member)
+            .where(
+                member.username.eq("member1"),       // username = 'member1'
+                member.username.ne("member1"),       // username != 'member1'
+                member.username.eq("member1").not(), // username != 'member1'
+                member.username.isNotNull,                 // 이름이 is not null
+                member.age.`in`(10, 20),            // age in (10,20)
+                member.age.notIn(10, 20),           // age not in (10, 20)
+                member.age.between(10, 30),                // between 10, 30
+                member.age.goe(30),                  // age >= 30
+
+                member.age.gt(30),                   // age > 30
+                member.age.loe(30),                  // age <= 30
+                member.age.lt(30),                   // age < 30
+                member.username.like("member%"),      // like 검색
+                member.username.contains("member"),       // like ‘%member%’ 검색
+                member.username.startsWith("member"),     // like ‘member%’ 검색
+            )
+    }
+
+    @Test
+    fun `검색 조건 처리 - AND 조건을 파라미터로 처리`() {
+        val result = queryFactory
+            .selectFrom(member)
+            .where(
+                member.username.eq("member1"),
+                member.age.eq(10),
+                null, // 무시
+            )
+            .fetch()
+
+        Assertions.assertEquals(1, result.size)
+        /**
+         * where()에 파라미터로 검색조건을 추가하면 AND 조건이 추가된다.
+         * 조건의 결과가 null이면 무시 => 동적 쿼리를 깔끔하게 만들 수 있다.
          */
     }
 }
