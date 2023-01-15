@@ -3,6 +3,7 @@ package com.study.querydsl
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.study.querydsl.domain.Member
 import com.study.querydsl.domain.QMember
+import com.study.querydsl.domain.QMember.* // like this
 import com.study.querydsl.domain.Team
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
@@ -75,6 +76,25 @@ class QuerydslBasicTest @Autowired constructor(
             .fetchOne()
 
         Assertions.assertEquals("member1", member?.username)
+    }
+
+    @Test
+    fun `기본 Q-Type 활용`() {
+        val qMember1 = QMember("m") // 별칭을 직접 지정
+        val qMember2 = member // 기본 인스턴스 사용
+
+        // static import로 추가할수도 있다.
+        val member = queryFactory.select(member)
+            .from(member)
+            .where(member.username.eq("member1"))
+            .fetchOne()
+
+        Assertions.assertEquals("member1", member?.username)
+
+        /**
+         * 같은 테이블을 조인해야 하는 경우 테이블명이 달라져야하기 때문에 별칭을 지정해야 하지만
+         * 그게 아니라면 기본 인스턴스를 쓰거나 import 해서 쓰는걸 권장한다.
+         */
     }
 }
 
