@@ -177,5 +177,38 @@ class QuerydslBasicTest @Autowired constructor(
         println(membersCount)
         println("==========================================================")
     }
+
+    @Test
+    fun `정렬`() {
+        /**
+         * 회원 정렬 순서
+         * 1. 회원 나이 내림차순(desc)
+         * 2. testForNullLast 컬럼 올림차순(asc)
+         * 단 2에서 회원 이름이 없으면 마지막에 출력(nulls last)
+         *
+         * desc(), asc() 일반 정렬
+         * nullsLast(), nullsFirst() : null 데이터 순서 부여
+         */
+        em.persist(Member(username ="member5", age = 35, testForNullLast = 1))
+        em.persist(Member(username ="member6", age = 35, testForNullLast = null))
+        em.persist(Member(username ="member7", age = 35, testForNullLast = 2))
+
+        val result = queryFactory
+            .selectFrom(member)
+            .orderBy(member.age.desc(), member.testForNullLast.asc().nullsLast())
+            .fetch()
+
+
+        result.forEach { println(it) }
+        /**
+            Member(id=6 username=member4, age=40, testForNullLast=0)
+            Member(id=7 username=member5, age=35, testForNullLast=1)
+            Member(id=9 username=member7, age=35, testForNullLast=2)
+            Member(id=8 username=member6, age=35, testForNullLast=null)
+            Member(id=5 username=member3, age=30, testForNullLast=0)
+            Member(id=4 username=member2, age=20, testForNullLast=0)
+            Member(id=3 username=member1, age=10, testForNullLast=0)
+         */
+    }
 }
 

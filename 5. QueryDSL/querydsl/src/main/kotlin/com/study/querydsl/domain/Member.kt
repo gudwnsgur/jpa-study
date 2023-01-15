@@ -1,6 +1,5 @@
 package com.study.querydsl.domain
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 /**
@@ -15,6 +14,8 @@ class Member(
     val username: String,
     val age: Int = 0,
 
+    val testForNullLast: Int? = 0,
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     var team: Team? = null,
@@ -25,7 +26,7 @@ class Member(
     }
 
     override fun toString(): String {
-        return "Member(id=${id} username=${username}, age=${age})"
+        return "Member(id=${id} username=${username}, age=${age}, testForNullLast=${testForNullLast})"
     }
 
     companion object {
