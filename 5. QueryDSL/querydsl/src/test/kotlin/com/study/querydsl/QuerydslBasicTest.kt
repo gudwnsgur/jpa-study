@@ -154,5 +154,28 @@ class QuerydslBasicTest @Autowired constructor(
          * 조건의 결과가 null이면 무시 => 동적 쿼리를 깔끔하게 만들 수 있다.
          */
     }
+
+    @Test
+    fun `결과 조회`() {
+        val membersByFetch = queryFactory.selectFrom(member).fetch() // list
+        val memberByFetchOne = queryFactory.selectFrom(member).where(member.age.eq(10)).fetchOne() // 단건
+        val memberByFetchFirst = queryFactory.selectFrom(member).fetchFirst() // 리스트중 첫 한건
+        val membersWithPaging = queryFactory.selectFrom(member).fetchResults() // 페이징에서 사용
+        val membersCount = queryFactory.selectFrom(member).fetchCount() // count 쿼리로 변경
+
+
+        println("======================== .fetch() ========================")
+        println(membersByFetch)
+        println("======================== .fetchOne() =====================")
+        // 단건이 아닌데 쓰면 NonUniqueResultException
+        println(memberByFetchOne)
+        println("======================== .fetchFirst() ===================")
+        println(memberByFetchFirst)
+        println("======================== .fetchResults() =================")
+        println(membersWithPaging.results)
+        println("======================== .fetchCount()  ==================")
+        println(membersCount)
+        println("==========================================================")
+    }
 }
 
