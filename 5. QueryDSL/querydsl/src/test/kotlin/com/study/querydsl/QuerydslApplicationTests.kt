@@ -1,9 +1,8 @@
 package com.study.querydsl
 
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.study.querydsl.entity.Hello
-import com.study.querydsl.entity.QHello
-import io.jsonwebtoken.lang.Assert
+import com.study.querydsl.domain.Hello
+import com.study.querydsl.domain.QHello
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

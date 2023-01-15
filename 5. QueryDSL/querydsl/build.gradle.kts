@@ -1,5 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript {
+	dependencies {
+		classpath("org.jetbrains.kotlin:kotlin-allopen:1.5.21")
+	}
+}
+
 plugins {
 	id("org.springframework.boot") version "2.5.4"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
@@ -16,6 +22,8 @@ plugins {
 
 allOpen {
 	annotation("javax.persistence.Entity")
+	annotation("javax.persistence.MappedSuperclass")
+	annotation("javax.persistence.Embeddable")
 }
 
 noArg {
@@ -25,7 +33,9 @@ noArg {
 group = "com.study"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
-val qeurydslVersion = "4.4.0" // 이거 함 추가해봤다
+val qeurydslVersion = "4.4.0"
+
+apply(plugin = "org.jetbrains.kotlin.plugin.allopen")
 
 repositories {
 	mavenCentral()

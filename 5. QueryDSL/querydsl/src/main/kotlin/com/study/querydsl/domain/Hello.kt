@@ -1,4 +1,4 @@
-package com.study.querydsl.entity
+package com.study.querydsl.domain
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
